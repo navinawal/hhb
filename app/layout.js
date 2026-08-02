@@ -1,7 +1,7 @@
-import { Cormorant_Garamond, Inter, Noto_Sans_Devanagari } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 
-const display = Cormorant_Garamond({
+const display = Fraunces({
   subsets: ["latin"],
   variable: "--font-display",
   weight: ["500", "600", "700"],
@@ -10,11 +10,6 @@ const display = Cormorant_Garamond({
 const body = Inter({
   subsets: ["latin"],
   variable: "--font-body",
-});
-
-const nepali = Noto_Sans_Devanagari({
-  subsets: ["devanagari"],
-  variable: "--font-nepali",
 });
 
 const comingSoon = process.env.SITE_MODE === "coming-soon";
@@ -26,7 +21,7 @@ export const metadata = {
     : "Holiday Home Bhaktapur | Rooms near Durbar Square",
   description: comingSoon
     ? "The new Holiday Home Bhaktapur website is coming soon."
-    : "Clean, air-conditioned private rooms and kitchen rooms within walking distance of Bhaktapur Durbar Square and Nyatapola Temple.",
+    : "Clean, air-conditioned private rooms, including rooms with private kitchens, within walking distance of Bhaktapur Durbar Square and Nyatapola Temple.",
   robots: comingSoon ? { index: false, follow: false } : undefined,
   openGraph: {
     title: "Holiday Home Bhaktapur",
@@ -39,7 +34,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${display.variable} ${body.variable} ${nepali.variable}`}>
+      <body className={`${display.variable} ${body.variable}`}>
         {children}
       </body>
     </html>
