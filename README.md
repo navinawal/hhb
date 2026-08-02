@@ -29,3 +29,7 @@ Create a sheet with these exact column names:
 ## Before launch
 
 Set the real values for `NEXT_PUBLIC_BOOKING_URL`, `NEXT_PUBLIC_AIRBNB_URL`, `NEXT_PUBLIC_MAP_URL`, `NEXT_PUBLIC_SITE_URL`, and the NPR/USD guide in `.env.local`. Buttons for missing platform and map URLs remain hidden.
+
+## Production holding page
+
+Set `SITE_MODE=coming-soon` only in the Vercel **Production** environment. Production will show the branded holding page, while Preview deployments continue to show the complete website. Remove the variable and redeploy when the full site is ready to launch.

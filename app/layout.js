@@ -17,11 +17,17 @@ const nepali = Noto_Sans_Devanagari({
   variable: "--font-nepali",
 });
 
+const comingSoon = process.env.SITE_MODE === "coming-soon";
+
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
-  title: "Holiday Home Bhaktapur | Rooms near Durbar Square",
-  description:
-    "Clean, air-conditioned private rooms and kitchen rooms within walking distance of Bhaktapur Durbar Square and Nyatapola Temple.",
+  title: comingSoon
+    ? "Holiday Home Bhaktapur | Coming Soon"
+    : "Holiday Home Bhaktapur | Rooms near Durbar Square",
+  description: comingSoon
+    ? "The new Holiday Home Bhaktapur website is coming soon."
+    : "Clean, air-conditioned private rooms and kitchen rooms within walking distance of Bhaktapur Durbar Square and Nyatapola Temple.",
+  robots: comingSoon ? { index: false, follow: false } : undefined,
   openGraph: {
     title: "Holiday Home Bhaktapur",
     description: "A peaceful, comfortable stay in the heart of Bhaktapur.",
