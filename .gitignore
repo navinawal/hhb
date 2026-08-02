@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+.env*
+!.env.example
+npm-debug.log*
+.DS_Store
+test-results/
+playwright-report/
+dev-server*.log
+
+# Original source assets are preserved locally; the website copies live in public/images.
+nORMAL ROOMS/
+ROOMS WITH KITCHEN/
+holidayhomebhaktapurlogo.jpeg
