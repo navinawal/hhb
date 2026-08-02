@@ -282,7 +282,7 @@ footer { background: #17110e; color: white; padding: 80px max(24px, 6vw) 28px; }
   box-shadow: 0 22px 70px rgba(0,0,0,.38);
 }
 
-.coming-soon-logo { object-fit: cover; object-position: center; }
+.coming-soon-logo { object-fit: contain; object-position: center; }
 
 .coming-soon-place {
   margin: 30px 0 18px;

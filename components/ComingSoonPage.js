@@ -9,7 +9,7 @@ export default function ComingSoonPage() {
         <div className="coming-soon-logo-frame">
           <Image
             className="coming-soon-logo"
-            src="/images/logo.jpg"
+            src="/images/logo.png"
             alt="Holiday Home Bhaktapur"
             fill
             sizes="220px"

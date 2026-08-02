@@ -229,7 +229,7 @@ export default function HolidayHomePage() {
     <main className={isNepali ? "nepali" : ""}>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Holiday Home Bhaktapur home">
-          <Image src="/images/logo.jpg" alt="Holiday Home Bhaktapur" width={68} height={68} priority />
+          <Image src="/images/logo.png" alt="Holiday Home Bhaktapur" width={68} height={68} priority />
           <span><strong>Holiday Home</strong><small>Bhaktapur</small></span>
         </a>
         <nav className={menuOpen ? "nav-open" : ""} aria-label="Main navigation">
@@ -363,7 +363,7 @@ export default function HolidayHomePage() {
       </section>
 
       <footer>
-        <div className="footer-brand"><Image src="/images/logo.jpg" alt="" width={92} height={92} /><div><h2>Holiday Home Bhaktapur</h2><p>{t.footerCopy}</p></div></div>
+        <div className="footer-brand"><Image src="/images/logo.png" alt="" width={92} height={92} /><div><h2>Holiday Home Bhaktapur</h2><p>{t.footerCopy}</p></div></div>
         <div className="footer-contact"><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer"><MessageCircle /> +977 986-1814909</a>{platformLinks.length > 0 && <><span>{t.platformTitle}</span>{platformLinks.map((item) => <a key={item.label} href={item.href} target="_blank" rel="noreferrer">{item.label} <ExternalLink /></a>)}</>}</div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} {t.rights}</span><button onClick={() => setLanguage(isNepali ? "en" : "ne")}><Languages /> {isNepali ? "English" : "नेपाली"}</button></div>
       </footer>
