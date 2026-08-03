@@ -1,6 +1,6 @@
 # Holiday Home Bhaktapur
 
-A bilingual, single-page Next.js website for Holiday Home Bhaktapur. It includes room browsing, a property gallery, WhatsApp booking requests, transport requests, and an optional Google Sheet rate/availability connection.
+A four-language, single-page Next.js website for Holiday Home Bhaktapur. It includes room browsing, swipeable photo galleries, WhatsApp booking requests, an optional Google Sheet rate/availability connection, and a protected inline visual CMS.
 
 ## Run locally
 
@@ -10,6 +10,38 @@ npm run dev
 ```
 
 Copy `.env.example` to `.env.local` and fill in the public map and booking-platform links before launch.
+
+## Visual CMS
+
+Open `http://localhost:3000/admin` and sign in with the configured CMS account. The editor renders the real website and places pencil buttons beside editable text, room details, images, contact information, and translations.
+
+- **Apply changes** updates the on-screen draft only.
+- **Save draft** stores changes privately; visitors still see the previously published page.
+- **Preview** hides editor controls so the draft can be checked cleanly.
+- **Publish** applies all current edits to the public website and creates a restorable revision.
+- **History** restores an older published version as a draft. Restoring does not change the live page until Publish is pressed.
+
+The local account variables are stored only in the ignored `.env.local` file. Never commit the password, its hash, the session secret, or Blob tokens.
+
+### Vercel storage setup
+
+Create two Blob stores from the Vercel project’s **Storage** tab:
+
+1. A **Private** Blob store for draft content, published content, login rate limits, and revisions. Connect it with the `CMS_` prefix so Vercel creates `CMS_READ_WRITE_TOKEN`.
+2. A **Public** Blob store for uploaded website photographs. Connect it with the `CMS_MEDIA_` prefix so Vercel creates `CMS_MEDIA_READ_WRITE_TOKEN`.
+
+Add these variables to both Preview and Production as needed:
+
+```text
+CMS_USERNAME
+CMS_PASSWORD_SALT
+CMS_PASSWORD_HASH
+CMS_SESSION_SECRET
+CMS_READ_WRITE_TOKEN
+CMS_MEDIA_READ_WRITE_TOKEN
+```
+
+Copy the first four secure values from the local `.env.local` into Vercel. Production CMS writes fail safely when storage is not configured; the public page continues using its built-in content.
 
 ## Google Sheet rates
 

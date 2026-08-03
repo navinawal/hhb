@@ -1,15 +1,16 @@
-import { Fraunces, Inter } from "next/font/google";
+import { Martel, Mukta } from "next/font/google";
 import "./globals.css";
 
-const display = Fraunces({
-  subsets: ["latin"],
+const display = Martel({
+  subsets: ["latin", "devanagari"],
   variable: "--font-display",
-  weight: ["500", "600", "700"],
+  weight: ["600", "700"],
 });
 
-const body = Inter({
-  subsets: ["latin"],
+const body = Mukta({
+  subsets: ["latin", "devanagari"],
   variable: "--font-body",
+  weight: ["400", "500", "700"],
 });
 
 const comingSoon = process.env.SITE_MODE === "coming-soon";
@@ -29,6 +30,12 @@ export const metadata = {
     type: "website",
     images: ["/images/standard-room.jpg"],
   },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }) {

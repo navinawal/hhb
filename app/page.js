@@ -1,10 +1,12 @@
 import HolidayHomePage from "@/components/HolidayHomePage";
 import ComingSoonPage from "@/components/ComingSoonPage";
+import { getPublishedContent } from "@/lib/cms/content";
 
-export default function Page() {
+export default async function Page() {
   if (process.env.SITE_MODE === "coming-soon") {
     return <ComingSoonPage />;
   }
 
-  return <HolidayHomePage />;
+  const published = await getPublishedContent();
+  return <HolidayHomePage cmsContent={published?.data || null} />;
 }
