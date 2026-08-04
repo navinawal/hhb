@@ -1,5 +1,31 @@
 import { expect, test } from "@playwright/test";
 
+test("publishes complete, indexable SEO signals", async ({ page, request }) => {
+  await page.goto("/");
+
+  await expect(page).toHaveTitle(/Holiday Home Bhaktapur.*Private Rooms near Durbar Square/);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://holidayhomebhaktapur.com");
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /private rooms near Bhaktapur Durbar Square/i);
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", /^https:\/\/holidayhomebhaktapur\.com\/opengraph-image(?:\?.*)?$/);
+
+  const structuredData = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent());
+  expect(structuredData["@type"]).toBe("LodgingBusiness");
+  expect(structuredData.name).toBe("Holiday Home Bhaktapur");
+  expect(structuredData.address.addressLocality).toBe("Bhaktapur");
+  expect(structuredData.aggregateRating).toBeUndefined();
+
+  const robots = await request.get("/robots.txt");
+  expect(robots.ok()).toBe(true);
+  expect(await robots.text()).toContain("Disallow: /admin/");
+  expect(await robots.text()).toContain("Sitemap: https://holidayhomebhaktapur.com/sitemap.xml");
+
+  const sitemap = await request.get("/sitemap.xml");
+  expect(sitemap.ok()).toBe(true);
+  const sitemapXml = await sitemap.text();
+  expect(sitemapXml).toContain("<loc>https://holidayhomebhaktapur.com</loc>");
+  expect(sitemapXml).not.toContain("/admin");
+});
+
 async function swipe(locator, direction = "left") {
   const box = await locator.boundingBox();
   expect(box).not.toBeNull();

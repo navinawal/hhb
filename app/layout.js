@@ -1,4 +1,5 @@
 import { Martel, Mukta } from "next/font/google";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 const display = Martel({
@@ -16,19 +17,46 @@ const body = Mukta({
 const comingSoon = process.env.SITE_MODE === "coming-soon";
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
-  title: comingSoon
-    ? "Holiday Home Bhaktapur | Coming Soon"
-    : "Holiday Home Bhaktapur | Rooms near Durbar Square",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: comingSoon
+      ? `${SITE_NAME} | Coming Soon`
+      : `${SITE_NAME} | Private Rooms near Durbar Square`,
+    template: `%s | ${SITE_NAME}`,
+  },
   description: comingSoon
     ? "The new Holiday Home Bhaktapur website is coming soon."
-    : "Clean, air-conditioned private rooms, including rooms with private kitchens, within walking distance of Bhaktapur Durbar Square and Nyatapola Temple.",
-  robots: comingSoon ? { index: false, follow: false } : undefined,
+    : SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  category: "travel",
+  alternates: { canonical: "/" },
+  robots: comingSoon
+    ? { index: false, follow: false, nocache: true }
+    : {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-image-preview": "large",
+          "max-snippet": -1,
+          "max-video-preview": -1,
+        },
+      },
   openGraph: {
-    title: "Holiday Home Bhaktapur",
-    description: "A peaceful, comfortable stay in the heart of Bhaktapur.",
+    title: `${SITE_NAME} | Private Rooms near Durbar Square`,
+    description: SITE_DESCRIPTION,
     type: "website",
-    images: ["/images/standard-room.jpg"],
+    url: "/",
+    siteName: SITE_NAME,
+    locale: "en_US",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: SITE_NAME }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} | Private Rooms near Durbar Square`,
+    description: SITE_DESCRIPTION,
+    images: ["/opengraph-image"],
   },
 };
 
